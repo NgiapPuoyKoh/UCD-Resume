@@ -52,6 +52,7 @@ function repoInformationHTML(repos) {
 
 
 function fetchGitHubInformation(event) {
+    // empty the repos
     $("#gh-user-data").html("");
     $("#gh-repo-data").html("");
 
@@ -67,6 +68,8 @@ function fetchGitHubInformation(event) {
         </div>`
     );
 
+    // address of github api with value of username
+
     $.when(
         // $.getJSON(`https://api.github.com/users/${username}`),
         // $.getJSON(`https://api.github.com/users/${username}/repos`)
@@ -76,7 +79,7 @@ function fetchGitHubInformation(event) {
         function(firstResponse, secondResponse) {
             var userData = firstResponse[0];
             var repoData = secondResponse[0];
-            console.log(userData);
+//            console.log(userData);
             $("#gh-user-data").html(userInformationHTML(userData));
             $("#gh-repo-data").html(repoInformationHTML(repoData));
         }, function(errorResponse) {
@@ -89,3 +92,6 @@ function fetchGitHubInformation(event) {
             }
         });
 }
+
+//Have Octocat profile displaying when page is loaded
+$(document).ready(fetchGitHubInformation);
